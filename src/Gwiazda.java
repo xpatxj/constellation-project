@@ -55,25 +55,25 @@ public class Gwiazda {
     public String dodajGwiazde(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nowa gwiazda powinna zawietać następujące dane:");
-        System.out.println("Nazwa katalogowa, deklinacja, rektascensja, obserwowana wielkość gwiazdowa, odległość, gwiazdozbiór, półkula, temperatura, masa");
-        System.out.println("Podaj nazwę katalogową gwiazdy: ");
-        String nazwaKatalogowa = scanner.nextLine();
-        if (sprawdzNazwe(nazwaKatalogowa)) {
-            System.out.println("Podaj deklinację gwiazdy: ");
-            String deklinacja = scanner.nextLine();
-            System.out.println("Podaj rektascensję gwiazdy: ");
-            String rektascensja = scanner.nextLine();
-            System.out.println("Podaj obserwowaną wielkość gwiazdową: ");
-            double obserwowanaWielkoscGwiazdowa = scanner.nextDouble();
-            System.out.println("Podaj odległość gwiazdy: ");
-            double odleglosc = scanner.nextDouble();
+        System.out.println("Nazwa katalogowa, deklinacja, rektascensja, obserwowana wielkość gwiazdowa, \nodległość, gwiazdozbiór, półkula, temperatura, masa");
+        System.out.println("Podaj nazwę gwiazdy. Ma składać się z 3 dużych liter i 4 cyfr: ");
+        String nazwa = scanner.nextLine();
+        if (sprawdzNazwe(nazwa)) {
             System.out.println("Podaj gwiazdozbiór gwiazdy: ");
             String gwiazdozbior = scanner.nextLine();
-            System.out.println("Podaj półkulę gwiazdy: ");
-            String polkula = scanner.nextLine();
-            System.out.println("Podaj temperaturę gwiazdy: ");
+            System.out.println("Podaj półkulę gwiazdy (PN/PD): ");
+            String polkula = scanner.nextLine().toUpperCase();
+            System.out.println("Podaj deklinację gwiazdy. Dla pólkuli północnej jej wartość może wynosić od 0 do 90 stopni, a na pólkuli południowej od 0 do -90 stopni. Upewnij się, że jest ona wpisana w następujący sposób: \"{ilosc} stopni {ilosc} minut {ilosc} sekund\": ");
+            String deklinacja = scanner.nextLine();
+            System.out.println("Podaj rektascensję gwiazdy. Upewnij się, że jest ona wpisana w następujący sposób: \"{ilosc} h {ilosc} m {ilosc} s\": ");
+            String rektascensja = scanner.nextLine();
+            System.out.println("Podaj obserwowaną wielkość gwiazdową. Wartość od -26.74 do 15 jednostek magnitudo: ");
+            double obserwowanaWielkoscGwiazdowa = scanner.nextDouble();
+            System.out.println("Podaj odległość gwiazdy w latach świetlnych: ");
+            double odleglosc = scanner.nextDouble();
+            System.out.println("Podaj temperaturę gwiazdy. Minimalna wartość to 2000 stopni Celcjusza: ");
             double temperatura = scanner.nextDouble();
-            System.out.println("Podaj masę gwiazdy: ");
+            System.out.println("Podaj masę gwiazdy podanej w odniesieniu do masy Słońca. W takim przypadku minimalna wartość to 0.1, natomiast maksymalna to 50: ");
             double masa = scanner.nextDouble();
             if (sprawdzDeklinacje(deklinacja, polkula) && sprawdzPolkule(polkula) && sprawdzRektascensje(rektascensja) && sprawdzWielkoscGwiazdowa(obserwowanaWielkoscGwiazdowa) && sprawdzTempearute(temperatura) && sprawdzMase(masa)) {
                 return "Dodano gwiazdę";
@@ -81,7 +81,7 @@ public class Gwiazda {
                 return "Nie dodano gwiazdy";
             }
         } else {
-            return "Nie dodano gwiazdy";
+            return "Nie dodano gwiazdy. Nieprawidłowy format nazwy.";
         }
     }
     public String usunGwiazde(){
