@@ -12,9 +12,9 @@ public class Gwiazda {
     private double temperatura;
     private double masa;
 
-    Gwiazda(String nazwa, String nazwaKatalogowa, double deklinacja, double rektascensja, double obserwowanaWielkoscGwiazdowa, double odleglosc, String gwiazdozbior, String polkula, double temperatura, double masa) {
+    Gwiazda(String nazwa, double deklinacja, double rektascensja, double obserwowanaWielkoscGwiazdowa, double odleglosc, String gwiazdozbior, String polkula, double temperatura, double masa) {
         this.nazwa = nazwa;
-        this.nazwaKatalogowa = nazwaKatalogowa;
+        this.nazwaKatalogowa = "";
         this.deklinacja = deklinacja;
         this.rektascensja = rektascensja;
         this.obserwowanaWielkoscGwiazdowa = obserwowanaWielkoscGwiazdowa;
@@ -67,14 +67,14 @@ public class Gwiazda {
     public boolean sprawdzMase(double masa) {
         return masa >= 0.1 && masa <= 50;
     }
-    public String dodajGwiazde(){
+    public void dodajGwiazde(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nowa gwiazda powinna zawietać następujące dane:");
         System.out.println("Nazwa katalogowa, deklinacja, rektascensja, obserwowana wielkość gwiazdowa, \nodległość, gwiazdozbiór, półkula, temperatura, masa");
         System.out.println("Podaj nazwę gwiazdy. Ma składać się z 3 dużych liter i 4 cyfr: ");
         String nazwa = scanner.nextLine();
         if (sprawdzNazwe(nazwa)) {
-            boolean czyWszystkoDobrze = false;
+            boolean czyWszystkoDobrze = true;
             System.out.println("Podaj gwiazdozbiór gwiazdy: ");
             String gwiazdozbior = scanner.nextLine();
             System.out.println("Podaj półkulę gwiazdy (PN/PD): ");
@@ -128,12 +128,13 @@ public class Gwiazda {
                 System.out.println("Nieprawidłowa masa. Spróbuj ponownie.");
             }
             if (czyWszystkoDobrze) {
-                return "Dodano gwiazdę";
+                String nazwaKatalogowa = gwiazdozbior;
+                System.out.println("Gwiazda może być dodana");
             } else {
-                return "Nie dodano gwiazdy";
+                System.out.println("Nie można dodać gwiazdy.");
             }
         } else {
-            return "Nie dodano gwiazdy. Nieprawidłowy format nazwy. Spróbuj ponownie.";
+            System.out.println("Nie dodano gwiazdy. Nieprawidłowy format nazwy. Spróbuj ponownie.");
         }
     }
     public String usunGwiazde(){
