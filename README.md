@@ -20,3 +20,5 @@ The Constellation Project is an application for managing a star database. It all
 
 4. **Data Persistence**: All data is saved in an object file for persistence.
 
+#### Langauge
+This project is created in Polish, but it may be translated to English later.
