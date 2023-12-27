@@ -85,11 +85,7 @@ public class Gwiazda {
         }
     }
     public String usunGwiazde(){
-        if (sprawdzNazwe(nazwaKatalogowa)) {
-            return "Usunięto gwiazdę";
-        } else {
-            return "Nie usunięto gwiazdy";
-        }
+        return "";
     }
 }
 
