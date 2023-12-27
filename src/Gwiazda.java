@@ -1,16 +1,16 @@
 import java.util.Scanner;
 public class Gwiazda {
-    private String nazwa;
-    private String nazwaKatalogowa;
-    private double deklinacja;
-    private double rektascensja;
-    private double obserwowanaWielkoscGwiazdowa;
-    private double absolutnaWielkoscGwiazdowa;
-    private double odleglosc;
-    private String gwiazdozbior;
-    private String polkula;
-    private double temperatura;
-    private double masa;
+    String nazwa;
+    String nazwaKatalogowa;
+    double deklinacja;
+    double rektascensja;
+    double obserwowanaWielkoscGwiazdowa;
+    double absolutnaWielkoscGwiazdowa;
+    double odleglosc;
+    String gwiazdozbior;
+    String polkula;
+    double temperatura;
+    double masa;
 
     Gwiazda(String nazwa, double deklinacja, double rektascensja, double obserwowanaWielkoscGwiazdowa, double odleglosc, String gwiazdozbior, String polkula, double temperatura, double masa) {
         this.nazwa = nazwa;
