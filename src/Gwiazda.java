@@ -1,6 +1,7 @@
 import java.util.Scanner;
 public class Gwiazda {
     String nazwa;
+    BazaGwiazd.AlfabetGrecki literaGrecka;
     String nazwaKatalogowa;
     double deklinacja;
     double rektascensja;
