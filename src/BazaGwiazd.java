@@ -17,6 +17,7 @@ public class BazaGwiazd {
         AlfabetGrecki literaGrecka = AlfabetGrecki.values()[index];
         return literaGrecka.name().toLowerCase() + " " + gwiazda.gwiazdozbior;
     }
+
     void usunGwiazde(String nazwaKatalogowa) {
         for (Map.Entry<String, List<Gwiazda>> entry : gwiazdozbiory.entrySet()) {
             List<Gwiazda> gwiazdy = entry.getValue();
@@ -29,5 +30,14 @@ public class BazaGwiazd {
         }
     }
 
+    public void wyswietlWszystkieGwiazdy() {
+        for (Map.Entry<String, List<Gwiazda>> entry : gwiazdozbiory.entrySet()) {
+            System.out.println("Gwiazdozbiór: " + entry.getKey());
+            for (Gwiazda gwiazda : entry.getValue()) {
+                System.out.println("Nazwa: " + gwiazda.nazwa);
+                System.out.println("Nazwa katalogowa: " + getNazwaKatalogowa(gwiazda));
+                System.out.println();
+            }
+        }
+    }
 }
-
