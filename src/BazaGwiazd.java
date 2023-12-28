@@ -6,16 +6,16 @@ public class BazaGwiazd {
     }
 
     Map<String, List<Gwiazda>> gwiazdozbiory = new HashMap<>();
-    Map<String, Integer> licznikGwiazdWGwiazdozbiorze = new HashMap<>();
 
     void dodajGwiazde(Gwiazda gwiazda) {
-        if (!gwiazdozbiory.containsKey(gwiazda.gwiazdozbior)) {
-            gwiazdozbiory.put(gwiazda.gwiazdozbior, new ArrayList<>());
-        }
-        gwiazdozbiory.get(gwiazda.gwiazdozbior).add(gwiazda);
-        int licznik = licznikGwiazdWGwiazdozbiorze.getOrDefault(gwiazda.gwiazdozbior, 0);
-        gwiazda.literaGrecka = AlfabetGrecki.values()[licznik];
-        gwiazda.nazwaKatalogowa = gwiazda.literaGrecka.name().toLowerCase() + " " + gwiazda.gwiazdozbior;
-        licznikGwiazdWGwiazdozbiorze.put(gwiazda.gwiazdozbior, licznik + 1);
+        gwiazdozbiory.computeIfAbsent(gwiazda.gwiazdozbior, k -> new ArrayList<>()).add(gwiazda);
+    }
+
+    String getNazwaKatalogowa(Gwiazda gwiazda) {
+        List<Gwiazda> gwiazdy = gwiazdozbiory.get(gwiazda.gwiazdozbior);
+        int index = gwiazdy.indexOf(gwiazda);
+        AlfabetGrecki literaGrecka = AlfabetGrecki.values()[index];
+        return literaGrecka.name().toLowerCase() + " " + gwiazda.gwiazdozbior;
     }
 }
+
