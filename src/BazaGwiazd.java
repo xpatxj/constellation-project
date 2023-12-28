@@ -17,5 +17,17 @@ public class BazaGwiazd {
         AlfabetGrecki literaGrecka = AlfabetGrecki.values()[index];
         return literaGrecka.name().toLowerCase() + " " + gwiazda.gwiazdozbior;
     }
+    void usunGwiazde(String nazwaKatalogowa) {
+        for (Map.Entry<String, List<Gwiazda>> entry : gwiazdozbiory.entrySet()) {
+            List<Gwiazda> gwiazdy = entry.getValue();
+            for (Gwiazda gwiazda : gwiazdy) {
+                if (getNazwaKatalogowa(gwiazda).equals(nazwaKatalogowa)) {
+                    gwiazdy.remove(gwiazda);
+                    return;
+                }
+            }
+        }
+    }
+
 }
 
