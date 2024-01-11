@@ -9,6 +9,7 @@ public class BazaGwiazd {
 
     void dodajGwiazde(Gwiazda gwiazda) {
         gwiazdozbiory.computeIfAbsent(gwiazda.gwiazdozbior, k -> new ArrayList<>()).add(gwiazda);
+        gwiazda.nazwaKatalogowa=this.getNazwaKatalogowa(gwiazda);
     }
 
     String getNazwaKatalogowa(Gwiazda gwiazda) {
@@ -24,8 +25,12 @@ public class BazaGwiazd {
             for (Gwiazda gwiazda : gwiazdy) {
                 if (getNazwaKatalogowa(gwiazda).equals(nazwaKatalogowa)) {
                     gwiazdy.remove(gwiazda);
-                    return;
+                    break;
                 }
+
+            }
+            for (Gwiazda gwiazda : gwiazdy) {
+                gwiazda.nazwaKatalogowa=this.getNazwaKatalogowa(gwiazda);
             }
         }
     }
@@ -39,5 +44,67 @@ public class BazaGwiazd {
                 System.out.println();
             }
         }
+    }
+    public  List<Gwiazda> wyszukajGwiazdyGwiazdozbioru(String szukanyGwiazdozbior){
+        List<Gwiazda> listaGwiazd;
+        listaGwiazd=gwiazdozbiory.get(szukanyGwiazdozbior);
+        return listaGwiazd;
+    }
+    public  List<Gwiazda> wyszukajGwiazdyOdlegleWParsekach(double odlegloscWParsekach){
+        ArrayList<Gwiazda> listaGwiazd= new  ArrayList<Gwiazda>();
+        for (Map.Entry<String, List<Gwiazda>> gwiazdozbior : gwiazdozbiory.entrySet())
+        {
+            for(Gwiazda gwiazda: gwiazdozbior.getValue())
+            {
+                if(odlegloscWParsekach==gwiazda.odlegloscWParsekach())
+                {
+                    listaGwiazd.add(gwiazda);
+                }
+            }
+        }
+        return listaGwiazd;
+    }
+    public  List<Gwiazda> wyszukajGwiazdyOTemperaturze(double poczatekPrzedzialu, double koniecPrzedzialu)
+    {
+        ArrayList<Gwiazda> listaGwiazd=new  ArrayList<Gwiazda>();
+        for (Map.Entry<String, List<Gwiazda>> gwiazdozbior : gwiazdozbiory.entrySet())
+        {
+            for(Gwiazda gwiazda: gwiazdozbior.getValue())
+            {
+                if(gwiazda.temperatura>=poczatekPrzedzialu && gwiazda.temperatura<=koniecPrzedzialu)
+                {
+                    listaGwiazd.add(gwiazda);
+                }
+            }
+        }
+        return listaGwiazd;
+    }
+    public  List<Gwiazda> wyszukajGwiazdyZPolkuli(RodzajPolkuli polkula)
+    {
+        ArrayList<Gwiazda> listaGwiazd=new  ArrayList<Gwiazda>();
+        for (Map.Entry<String, List<Gwiazda>> entry : gwiazdozbiory.entrySet())
+        {
+            for(Gwiazda gwiazda: entry.getValue())
+            {
+                if(gwiazda.polkula.equals(polkula))
+                {
+                    listaGwiazd.add(gwiazda);
+                }
+            }
+        }
+        return listaGwiazd;
+    }
+    public  List<Gwiazda> wyszukajSupernowe()
+    {
+        ArrayList<Gwiazda> listaGwiazd=new  ArrayList<Gwiazda>();
+        for (Map.Entry<String, List<Gwiazda>> gwiazdozbior : gwiazdozbiory.entrySet())
+        {
+            for(Gwiazda gwiazda: gwiazdozbior.getValue())
+            {
+                if(gwiazda.czySupernowa())
+                    listaGwiazd.add(gwiazda);
+            }
+        }
+        return listaGwiazd;
     }
 }
