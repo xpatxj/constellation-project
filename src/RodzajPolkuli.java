@@ -1,3 +1,3 @@
 public enum RodzajPolkuli {
-    PN,PD
+    nieznana,PN,PD
 }
