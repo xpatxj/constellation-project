@@ -6,19 +6,19 @@ public class BazaGwiazd {
     }
 
     Map<String, List<Gwiazda>> gwiazdozbiory = new HashMap<>();
-
+    //Metoda umożliwia dodanie gwiazdy do bazy
     void dodajGwiazde(Gwiazda gwiazda) {
         gwiazdozbiory.computeIfAbsent(gwiazda.gwiazdozbior, k -> new ArrayList<>()).add(gwiazda);
         gwiazda.nazwaKatalogowa=this.getNazwaKatalogowa(gwiazda);
     }
-
+    //Metoda zwraca nazwę katalogową gwiazdy
     String getNazwaKatalogowa(Gwiazda gwiazda) {
         List<Gwiazda> gwiazdy = gwiazdozbiory.get(gwiazda.gwiazdozbior);
         int index = gwiazdy.indexOf(gwiazda);
         AlfabetGrecki literaGrecka = AlfabetGrecki.values()[index];
         return literaGrecka.name().toLowerCase() + " " + gwiazda.gwiazdozbior;
     }
-
+    //Metoda pozwala usunąć gwiazdę z bazy gwiazd
     boolean usunGwiazde(String nazwaKatalogowa) {
         boolean znaleziona=false;
         for (Map.Entry<String, List<Gwiazda>> entry : gwiazdozbiory.entrySet()) {
@@ -38,7 +38,7 @@ public class BazaGwiazd {
         }
         return znaleziona;
     }
-
+    //Metoda wyświetla dane o wszystkich gwiazdach w bazie
     public void wyswietlWszystkieGwiazdy() {
         for (Map.Entry<String, List<Gwiazda>> entry : gwiazdozbiory.entrySet()) {
             System.out.println("******************************************");
@@ -52,11 +52,13 @@ public class BazaGwiazd {
             System.out.println("******************************************");
         }
     }
+    //Metoda sprawdza po kolei czy gwiazdy w bazie należą do podanego gwiazdozbioru i jeśli gwiazda spełnia warunek dodaje ją do listy, którą zwraca
     public  List<Gwiazda> wyszukajGwiazdyGwiazdozbioru(String szukanyGwiazdozbior){
         List<Gwiazda> listaGwiazd;
         listaGwiazd=gwiazdozbiory.get(szukanyGwiazdozbior);
         return listaGwiazd;
     }
+    //Metoda sprawdza po kolei czy wielkość gwiazdowa znajduje się w podanej w Parsekach odległości od Ziemi (przy porównaniu przelicza podaną w latach świetlnych odległość gwiazdy na odległość w Parsekach) i jeśli gwiazda spełnia warunek dodaje ją do listy, którą zwraca
     public  List<Gwiazda> wyszukajGwiazdyOdlegleWParsekach(double odlegloscWParsekach){
         ArrayList<Gwiazda> listaGwiazd= new ArrayList<>();
         for (Map.Entry<String, List<Gwiazda>> gwiazdozbior : gwiazdozbiory.entrySet())
@@ -71,6 +73,7 @@ public class BazaGwiazd {
         }
         return listaGwiazd;
     }
+    //Metoda sprawdza po kolei czy temperatura gwiazd w bazie mieści się w podanym przedziale i jeśli gwiazda spełnia warunek dodaje ją do listy, którą zwraca
     public  List<Gwiazda> wyszukajGwiazdyOTemperaturze(double poczatekPrzedzialu, double koniecPrzedzialu)
     {
         ArrayList<Gwiazda> listaGwiazd=new  ArrayList<Gwiazda>();
@@ -86,6 +89,7 @@ public class BazaGwiazd {
         }
         return listaGwiazd;
     }
+    //Metoda sprawdza po kolei czy wielkość gwiazdowa gwiazd w bazie mieści się w podanym przedziale i jeśli gwiazda spełnia warunek dodaje ją do listy, którą zwraca
     public  List<Gwiazda> wyszukajGwiazdyOWielkosciGwiazdowej(double poczatekPrzedzialu, double koniecPrzedzialu)
     {
         ArrayList<Gwiazda> listaGwiazd=new  ArrayList<Gwiazda>();
@@ -101,6 +105,7 @@ public class BazaGwiazd {
         }
         return listaGwiazd;
     }
+    //Metoda sprawdza po kolei czy gwiazdy w bazie są widoczne z podanej półkuli i jeśli gwiazda spełnia warunek dodaje ją do listy, którą zwraca
     public  List<Gwiazda> wyszukajGwiazdyZPolkuli(RodzajPolkuli polkula)
     {
         ArrayList<Gwiazda> listaGwiazd=new  ArrayList<Gwiazda>();
@@ -116,6 +121,7 @@ public class BazaGwiazd {
         }
         return listaGwiazd;
     }
+    //Metoda sprawdza po kolei gwiazdy w bazie pod względem bycia potencjalną supernową i jeśli gwiazda spełnia warunek dodaje ją do listy supernowych, którą zwraca
     public  List<Gwiazda> wyszukajSupernowe()
     {
         ArrayList<Gwiazda> listaGwiazd=new  ArrayList<Gwiazda>();
@@ -129,7 +135,8 @@ public class BazaGwiazd {
         }
         return listaGwiazd;
     }
-    public void dodajGwiazde(){
+    //Metoda sprawdza poprawność wprowadzanych danych i wykorzystując metodę dodajGwiazde dodaje gwiazde do bazy
+    public void pobierzDaneIUtworzGwiazde(){
         Scanner scanner = new Scanner(System.in);
         String deklinacja;
         String rektascensja;

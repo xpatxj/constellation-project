@@ -41,7 +41,7 @@ public class Main {
         System.out.println("=============================================================================");
         switch (wybor) {
             case "1":
-                baza.dodajGwiazde();
+                baza.pobierzDaneIUtworzGwiazde();
                 break;
             case "2":
                 baza.wyswietlWszystkieGwiazdy();
