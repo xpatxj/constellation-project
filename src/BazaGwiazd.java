@@ -28,6 +28,7 @@ public class BazaGwiazd {
                 }
 
             }
+            // Po usunięciu gwiazdy z gwiazdozbioru, aktualizujemy nazwy katalogowe pozostałych gwiazd
             for (Gwiazda gwiazda : gwiazdy) {
                 gwiazda.nazwaKatalogowa=this.getNazwaKatalogowa(gwiazda);
             }
@@ -141,8 +142,10 @@ public class BazaGwiazd {
         double odleglosc=0;
         double temperatura=0;
         double masa=0;
+
         System.out.println("Nowa gwiazda powinna zawietać następujące dane:");
         System.out.println("Nazwa katalogowa, deklinacja, rektascensja, obserwowana wielkość gwiazdowa, \nodległość, gwiazdozbiór, półkula, temperatura, masa");
+        // Dopóki nie zostanie podana prawidłowa nazwa, proces dodawania gwiazdy nie ruszy dalej
         System.out.println("Podaj nazwę gwiazdy. Ma składać się z 3 dużych liter i 4 cyfr: ");
         String nazwa = scanner.nextLine();
         boolean czyImieDobre = false;
@@ -154,7 +157,8 @@ public class BazaGwiazd {
                 System.out.println("Podaj półkulę: ");
                 RodzajPolkuli polkula = RodzajPolkuli.nieznana;
                 while (polkula == RodzajPolkuli.nieznana) {
-                    String pomocnicza_polkula2 = scanner.nextLine();
+                    String pomocnicza_polkula2 = scanner.nextLine().toUpperCase();
+                    // Sprawdzamy, czy podano prawidłową półkulę
                     switch (pomocnicza_polkula2) {
                         case ("PN"):
                             polkula = RodzajPolkuli.PN;
@@ -170,6 +174,7 @@ public class BazaGwiazd {
                 do {
                     System.out.println("Podaj deklinację gwiazdy. Dla pólkuli północnej jej wartość może wynosić od 0 do 90 stopni, a na pólkuli południowej od 0 do -90 stopni. \nUpewnij się, że jest ona wpisana w następujący sposób: \"{xx} stopni {yy} minut {zz.zz} sekund\": ");
                     deklinacja = scanner.nextLine();
+                    // Sprawdzamy, czy podano prawidłową deklinację używając metody sprawdzDeklinacje
                     if (Gwiazda.sprawdzDeklinacje(deklinacja, polkula)) {
                         czyDeklinacjaDobrze = true;
                     } else {
@@ -181,6 +186,7 @@ public class BazaGwiazd {
                 do {
                     System.out.println("Podaj rektascensję gwiazdy. Upewnij się, że jest ona wpisana w następujący sposób: \"{ilosc} h {ilosc} m {ilosc} s\": ");
                     rektascensja = scanner.nextLine();
+                    // Sprawdzamy, czy podano prawidłową rektascensję używając metody sprawdzRektascensje
                     if (Gwiazda.sprawdzRektascensje(rektascensja)) {
                         czyRektascensjaDobrze = true;
                     } else {
@@ -191,7 +197,7 @@ public class BazaGwiazd {
                 boolean czyObserwowanaWielkoscGwiazdowaDobrze = false;
                 do {
                     System.out.println("Podaj obserwowaną wielkość gwiazdową. Wartość od -26.74 do 15 jednostek magnitudo: ");
-
+                    // Sprawdzamy, czy podano prawidłową wielkość gwiazdową używając metody sprawdzWielkoscGwiazdowa
                     String pomocniczaObserwowanaWielkoscGwiazdowa = scanner.nextLine();
                     try {
                         obserwowanaWielkoscGwiazdowa = Double.parseDouble(pomocniczaObserwowanaWielkoscGwiazdowa);
@@ -211,6 +217,7 @@ public class BazaGwiazd {
                 do {
                     System.out.println("Podaj odległość gwiazdy w latach świetlnych: ");
                     String odlegloscPomocnicza = scanner.nextLine();
+                    // Sprawdzamy, czy podano prawidłową odległość używając metody sprawdzOdleglosc
                     try {
                         odleglosc = Double.parseDouble(odlegloscPomocnicza);
                         czyOdlegloscDobrze = true;
@@ -223,6 +230,7 @@ public class BazaGwiazd {
                 do {
                     System.out.println("Podaj temperaturę gwiazdy. Minimalna wartość to 2000 stopni Celcjusza: ");
                     String temperaturaPomocnicza = scanner.nextLine();
+                    // Sprawdzamy, czy podano prawidłową temperaturę używając metody sprawdzTemperature
                     try {
                         temperatura = Double.parseDouble(temperaturaPomocnicza);
                         if (Gwiazda.sprawdzTemperature(temperatura)) {
@@ -242,7 +250,7 @@ public class BazaGwiazd {
                     String masaPomocnicza = scanner.nextLine();
                     try {
                         masa = Double.parseDouble(masaPomocnicza);
-
+                        // Sprawdzamy, czy podano prawidłową masę używając metody sprawdzMase
                         if (Gwiazda.sprawdzMase(masa)) {
                             czyMasaDobrze = true;
                         } else {
@@ -260,6 +268,7 @@ public class BazaGwiazd {
                         czyImieDobre = true;
                         System.out.println("Dodano gwiazdę do bazy.");
                     } catch (Exception e) {
+                        // Jeśli nie udało się dodać gwiazdy, wyświetlamy komunikat o błędzie
                         System.out.println("Błąd przy dodawaniu gwiazdy" + e.getMessage());
                     }
 

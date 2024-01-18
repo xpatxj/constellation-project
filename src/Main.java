@@ -7,6 +7,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         BazaGwiazd baza= new BazaGwiazd();
         try {
+            // Sprawdzamy, czy wszystko dobrze działa, automatycznie dodając kilka nowych gwiazd do bazy
             Gwiazda gwiazda1 = new Gwiazda("ABC1234", "38 stopni 47 minut 01.00 sekund", "23 h 52 m 00 s", 5, 434, "Strzelec", RodzajPolkuli.PN, 4600, 0.9);
             Gwiazda gwiazda2 = new Gwiazda("GHI6789", "50 stopni 12 minut 40.44 sekund", "17 h 32 m 00 s", -10, 320, "Strzelec", RodzajPolkuli.PN, 2900, 0.3);
             Gwiazda gwiazda3 = new Gwiazda("MNO3456", "55 stopni 55 minut 55.55 sekund", "15 h 20 m 30 s", 6, 208, "Strzelec", RodzajPolkuli.PN, 5000, 13);
@@ -25,6 +26,7 @@ public class Main {
         }
         boolean czyMenu=true;
         while (czyMenu){
+            //Wyświetlamy menu, dopóki użytkownik nie wybierze opcji 0
             System.out.println("=============================================================================\nMENU");
             System.out.println("0 - zakończ działanie programu i wyjdź z menu");
             System.out.println("1 - stwórz nowy obiekt klasy Gwiazda i dodaj ją do bazy");
@@ -165,6 +167,7 @@ public class Main {
                     }
                     break;
                 case "0":
+                    System.out.println("Do zobaczenia!");
                     czyMenu=false;
                     break;
                 default:
@@ -172,7 +175,5 @@ public class Main {
                     break;
             }
         }
-
     }
-
 }

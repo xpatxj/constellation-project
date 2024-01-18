@@ -128,7 +128,7 @@ public class Gwiazda {
         System.out.println("Absolutna wielkość gwiazdowa: "+this.absolutnaWielkoscGwiazdowa);
         System.out.println("Odległość: "+this.odleglosc);
         System.out.println("Gwiazdozbiór: "+this.gwiazdozbior);
-        System.out.println("półkula:"+this.polkula.toString());
+        System.out.println("półkula: "+this.polkula.toString());
         System.out.println("Temperatura: "+this.temperatura);
         System.out.println("Masa: "+this.masa);
 
