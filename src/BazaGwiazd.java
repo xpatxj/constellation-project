@@ -13,7 +13,13 @@ public class BazaGwiazd {
         List<Gwiazda> gwiazdy = gwiazdozbiory.get(gwiazda.gwiazdozbior);
         int index = gwiazdy.indexOf(gwiazda);
         AlfabetGrecki literaGrecka = AlfabetGrecki.values()[index];
-        return literaGrecka.name().toLowerCase() + " " + gwiazda.gwiazdozbior;
+        // Jeśli gwiazd w gwiazdozbiorze jest więcej niż 24, to dodajemy do nazwy katalogowej numer gwiazdy, np. alfa Ryby 2 itd.
+        if (literaGrecka.ordinal() > 23) {
+            return literaGrecka.name().toLowerCase() + " " + gwiazda.gwiazdozbior + " " + (literaGrecka.ordinal() - 23);
+        }
+        else {
+            return literaGrecka.name().toLowerCase() + " " + gwiazda.gwiazdozbior;
+        }
     }
     //Metoda pozwala usunąć gwiazdę z bazy gwiazd
     boolean usunGwiazde(String nazwaKatalogowa) {
