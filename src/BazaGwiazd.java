@@ -1,9 +1,6 @@
 import java.util.*;
 
 public class BazaGwiazd {
-    enum AlfabetGrecki {
-        ALFA, BETA, GAMMA, DELTA, EPSILON, ZETA, ETA, THETA, IOTA, KAPPA, LAMBDA, MU, NU, XI, OMICRON, PI, RHO, SIGMA, TAU, UPSILON, PHI, CHI, PSI, OMEGA
-    }
 
     Map<String, List<Gwiazda>> gwiazdozbiory = new HashMap<>();
     //Metoda umożliwia dodanie gwiazdy do bazy
@@ -148,11 +145,11 @@ public class BazaGwiazd {
         System.out.println("Nazwa katalogowa, deklinacja, rektascensja, obserwowana wielkość gwiazdowa, \nodległość, gwiazdozbiór, półkula, temperatura, masa");
         System.out.println("Podaj nazwę gwiazdy. Ma składać się z 3 dużych liter i 4 cyfr: ");
         String nazwa = scanner.nextLine();
-        boolean czyWszystkoDobrze = false;
+        boolean czyImieDobre = false;
         do {
             if (Gwiazda.sprawdzNazwe(nazwa)) {
 
-                System.out.println("Podaj gwiazdozbiór gwiazdy: ");
+                System.out.println("Gwiazdozbiór: ");
                 String gwiazdozbior = scanner.nextLine();
                 System.out.println("Podaj półkulę: ");
                 RodzajPolkuli polkula = RodzajPolkuli.nieznana;
@@ -169,97 +166,108 @@ public class BazaGwiazd {
                             System.out.println("Wprowadź wartość PN lub PD");
                     }
                 }
-
+                boolean czyDeklinacjaDobrze = false;
                 do {
-                    System.out.println("Podaj deklinację gwiazdy. Dla pólkuli północnej jej wartość może wynosić od 0 do 90 stopni, a na pólkuli południowej od 0 do -90 stopni. Upewnij się, że jest ona wpisana w następujący sposób: \"{xx} stopni {yy} minut {zz.zz} sekund\": ");
+                    System.out.println("Podaj deklinację gwiazdy. Dla pólkuli północnej jej wartość może wynosić od 0 do 90 stopni, a na pólkuli południowej od 0 do -90 stopni. \nUpewnij się, że jest ona wpisana w następujący sposób: \"{xx} stopni {yy} minut {zz.zz} sekund\": ");
                     deklinacja = scanner.nextLine();
                     if (Gwiazda.sprawdzDeklinacje(deklinacja, polkula)) {
-                        czyWszystkoDobrze = true;
+                        czyDeklinacjaDobrze = true;
                     } else {
-                        czyWszystkoDobrze = false;
+                        czyDeklinacjaDobrze = false;
                         System.out.println("Nieprawidłowa deklinacja. Spróbuj ponownie.");
                     }
-                } while (!czyWszystkoDobrze);
-
+                } while (!czyDeklinacjaDobrze);
+                boolean czyRektascensjaDobrze = false;
                 do {
                     System.out.println("Podaj rektascensję gwiazdy. Upewnij się, że jest ona wpisana w następujący sposób: \"{ilosc} h {ilosc} m {ilosc} s\": ");
                     rektascensja = scanner.nextLine();
                     if (Gwiazda.sprawdzRektascensje(rektascensja)) {
-                        czyWszystkoDobrze = true;
+                        czyRektascensjaDobrze = true;
                     } else {
-                        czyWszystkoDobrze = false;
+                        czyRektascensjaDobrze = false;
                         System.out.println("Nieprawidłowa rektascensja. Spróbuj ponownie.");
                     }
-                } while (!czyWszystkoDobrze);
+                } while (!czyRektascensjaDobrze);
+                boolean czyObserwowanaWielkoscGwiazdowaDobrze = false;
                 do {
                     System.out.println("Podaj obserwowaną wielkość gwiazdową. Wartość od -26.74 do 15 jednostek magnitudo: ");
 
                     String pomocniczaObserwowanaWielkoscGwiazdowa = scanner.nextLine();
                     try {
                         obserwowanaWielkoscGwiazdowa = Double.parseDouble(pomocniczaObserwowanaWielkoscGwiazdowa);
+                        czyObserwowanaWielkoscGwiazdowaDobrze = true;
                     } catch (Exception e) {
-                        czyWszystkoDobrze = false;
+                        System.out.println("Nieprawidłowa wielkość gwiazdowa. Spróbuj ponownie.");
+                        czyObserwowanaWielkoscGwiazdowaDobrze = false;
                     }
-                    if (czyWszystkoDobrze && Gwiazda.sprawdzWielkoscGwiazdowa(obserwowanaWielkoscGwiazdowa)) {
-                        czyWszystkoDobrze = true;
+                    if (czyObserwowanaWielkoscGwiazdowaDobrze && Gwiazda.sprawdzWielkoscGwiazdowa(obserwowanaWielkoscGwiazdowa)) {
+                        czyObserwowanaWielkoscGwiazdowaDobrze = true;
                     } else {
-                        czyWszystkoDobrze = false;
+                        czyObserwowanaWielkoscGwiazdowaDobrze = false;
                         System.out.println("Nieprawidłowa wielkość gwiazdowa. Spróbuj ponownie.");
                     }
-                } while (!czyWszystkoDobrze);
-
+                } while (!czyObserwowanaWielkoscGwiazdowaDobrze);
+                boolean czyOdlegloscDobrze = false;
                 do {
                     System.out.println("Podaj odległość gwiazdy w latach świetlnych: ");
                     String odlegloscPomocnicza = scanner.nextLine();
                     try {
                         odleglosc = Double.parseDouble(odlegloscPomocnicza);
+                        czyOdlegloscDobrze = true;
                     } catch (Exception e) {
-                        czyWszystkoDobrze = false;
+                        System.out.println("Nieprawidłowa odległość. Spróbuj ponownie.");
+                        czyOdlegloscDobrze = false;
                     }
-                } while (!czyWszystkoDobrze || odleglosc<=0);
-                    do {
-                        System.out.println("Podaj temperaturę gwiazdy. Minimalna wartość to 2000 stopni Celcjusza: ");
-                        String temperaturaPomocnicza = scanner.nextLine();
-                        try {
-                            temperatura = Double.parseDouble(temperaturaPomocnicza);
-                            if (Gwiazda.sprawdzTemperature(temperatura)) {
-                                czyWszystkoDobrze = true;
-                            } else {
-                                czyWszystkoDobrze = false;
-                                System.out.println("Nieprawidłowa temperatura. Spróbuj ponownie.");
-                            }
-                        } catch (Exception e) {
-                            czyWszystkoDobrze = false;
+                } while (!czyOdlegloscDobrze || odleglosc<=0);
+                boolean czyTemperaturaDobrze = false;
+                do {
+                    System.out.println("Podaj temperaturę gwiazdy. Minimalna wartość to 2000 stopni Celcjusza: ");
+                    String temperaturaPomocnicza = scanner.nextLine();
+                    try {
+                        temperatura = Double.parseDouble(temperaturaPomocnicza);
+                        if (Gwiazda.sprawdzTemperature(temperatura)) {
+                            czyTemperaturaDobrze = true;
+                        } else {
+                            czyTemperaturaDobrze = false;
+                            System.out.println("Nieprawidłowa temperatura. Spróbuj ponownie.");
                         }
-                    } while (!czyWszystkoDobrze);
+                    } catch (Exception e) {
+                        System.out.println("Nieprawidłowa temperatura. Spróbuj ponownie.");
+                        czyTemperaturaDobrze = false;
+                    }
+                } while (!czyTemperaturaDobrze);
+                boolean czyMasaDobrze = false;
+                do {
+                    System.out.println("Podaj masę gwiazdy podanej w odniesieniu do masy Słońca. W takim przypadku minimalna wartość to 0.1, natomiast maksymalna to 50: ");
+                    String masaPomocnicza = scanner.nextLine();
+                    try {
+                        masa = Double.parseDouble(masaPomocnicza);
 
-                    do {
-                        System.out.println("Podaj masę gwiazdy podanej w odniesieniu do masy Słońca. W takim przypadku minimalna wartość to 0.1, natomiast maksymalna to 50: ");
-                        String masaPomocnicza = scanner.nextLine();
-                        try {
-                            masa = Double.parseDouble(masaPomocnicza);
-
-                            if (Gwiazda.sprawdzMase(masa)) {
-                                czyWszystkoDobrze = true;
-                            } else {
-                                czyWszystkoDobrze = false;
-                                System.out.println("Nieprawidłowa masa. Spróbuj ponownie.");
-                            }
-                        } catch (Exception e) {
-                            czyWszystkoDobrze = false;
+                        if (Gwiazda.sprawdzMase(masa)) {
+                            czyMasaDobrze = true;
+                        } else {
+                            czyMasaDobrze = false;
+                            System.out.println("Nieprawidłowa masa. Spróbuj ponownie.");
                         }
-                    } while (!czyWszystkoDobrze);
+                    } catch (Exception e) {
+                        System.out.println("Nieprawidłowa masa. Spróbuj ponownie.");
+                        czyMasaDobrze = false;
+                    }
+                } while (!czyMasaDobrze);
 
-                        try {
-                            dodajGwiazde(new Gwiazda(nazwa, deklinacja, rektascensja, obserwowanaWielkoscGwiazdowa, odleglosc, gwiazdozbior, polkula, temperatura, masa));
-                        } catch (Exception e) {
-                            System.out.println("Błąd przy dodawaniu gwiazdy" + e.getMessage());
-                        }
+                    try {
+                        dodajGwiazde(new Gwiazda(nazwa, deklinacja, rektascensja, obserwowanaWielkoscGwiazdowa, odleglosc, gwiazdozbior, polkula, temperatura, masa));
+                        czyImieDobre = true;
+                        System.out.println("Dodano gwiazdę do bazy.");
+                    } catch (Exception e) {
+                        System.out.println("Błąd przy dodawaniu gwiazdy" + e.getMessage());
+                    }
 
                 }
              else {
-                System.out.println("Nie dodano gwiazdy. Nieprawidłowy format nazwy. Spróbuj ponownie.");
+                System.out.println("Nie dodano gwiazdy. Nieprawidłowy format nazwy. Ponad nazwę ponownie.");
+                nazwa = scanner.nextLine();
             }
-        } while (!czyWszystkoDobrze);
+        } while (!czyImieDobre);
     }
 }
