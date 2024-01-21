@@ -1,4 +1,4 @@
-public class Gwiazda {
+public class Gwiazda implements java.io.Serializable{
 
     String nazwa;
     String nazwaKatalogowa;
@@ -47,6 +47,7 @@ public class Gwiazda {
         else
             this.masa = masa;
     }
+
     //Metoda sprawdza, czy nazwa składa się z 3 dużych liter i 4 cyfr
     public static boolean sprawdzNazwe(String nazwa)
     {

@@ -4,6 +4,7 @@ out/
 !**/src/test/**/out/
 **/.idea/**
 polecenie.txt
+*.ser
 
 ### Eclipse ###
 .apt_generated

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class BazaGwiazd {
+public class BazaGwiazd implements java.io.Serializable{
 
     Map<String, List<Gwiazda>> gwiazdozbiory = new HashMap<>();
     //Metoda umożliwia dodanie gwiazdy do bazy
@@ -48,9 +48,6 @@ public class BazaGwiazd {
             System.out.println("******************************************");
             System.out.println("Gwiazdozbiór: " + entry.getKey());
             for (Gwiazda gwiazda : entry.getValue()) {
-               /* System.out.println("Nazwa: " + gwiazda.nazwa);
-                System.out.println("Nazwa katalogowa: " + getNazwaKatalogowa(gwiazda));
-                System.out.println();*/
                 gwiazda.wyswietl();
             }
             System.out.println("******************************************");

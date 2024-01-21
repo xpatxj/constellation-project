@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
@@ -47,6 +49,17 @@ public class Main {
                     break;
                 case "2":
                     baza.wyswietlWszystkieGwiazdy();
+                    try {
+
+                        // Zapisujemy wszystkie gwiazdy do pliku o nazwie "baza.ser"
+                        FileOutputStream fos = new FileOutputStream("baza.ser");
+                        ObjectOutputStream oos = new ObjectOutputStream(fos);
+                        oos.writeObject(baza);
+                        oos.close();
+                        fos.close();
+                    } catch (IOException ioe) {
+                        ioe.printStackTrace();
+                    }
                     break;
                 case "3":
                     System.out.println("Podaj nazwę katalogową gwiazdy");
@@ -62,8 +75,19 @@ public class Main {
                     System.out.println("Podaj nazwę gwiazdozbioru, której gwiazdy chcesz wyświetlić: ");
                     String nazwaGwiazdozbioru = scanner.nextLine();
                     if (baza.gwiazdozbiory.containsKey(nazwaGwiazdozbioru)) {
-                        for (Gwiazda gwiazda : baza.wyszukajGwiazdyGwiazdozbioru(nazwaGwiazdozbioru)) {
+                        List<Gwiazda> gwiazdy = baza.wyszukajGwiazdyGwiazdozbioru(nazwaGwiazdozbioru);
+                        for (Gwiazda gwiazda : gwiazdy) {
                             gwiazda.wyswietl();
+                        }
+                        try {
+                            // Zapisujemy znalezione gwiazdy do pliku o nazwie "nazwaGwiazdozbioru.ser"
+                            FileOutputStream fos = new FileOutputStream(nazwaGwiazdozbioru + ".ser");
+                            ObjectOutputStream oos = new ObjectOutputStream(fos);
+                            oos.writeObject(gwiazdy);
+                            oos.close();
+                            fos.close();
+                        } catch (IOException ioe) {
+                            ioe.printStackTrace();
                         }
                     } else {
                         System.out.println("Gwiazdozbiór: " + nazwaGwiazdozbioru + " nie istnieje");
@@ -79,6 +103,17 @@ public class Main {
                                 for (Gwiazda gwiazda : znalezione) {
                                     gwiazda.wyswietl();
                                 }
+                                try {
+                                    // Zapisujemy znalezione gwiazdy do pliku o nazwie "gwiazdy_odlegloscWParsekachpc.ser"
+                                    FileOutputStream fos = new FileOutputStream("gwiazdy_" + odlegloscWParsekach + "pc.ser");
+                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                    oos.writeObject(znalezione);
+                                    oos.close();
+                                    fos.close();
+                                } catch (IOException ioe) {
+                                    ioe.printStackTrace();
+                                }
+
                             } else {
                                 System.out.println("Nie znaleziono gwiazdy o podanej odległości");
                             }
@@ -101,7 +136,19 @@ public class Main {
                             for (Gwiazda gwiazda : znalezione) {
                                 gwiazda.wyswietl();
                             }
-                            if(znalezione.isEmpty())
+                            if(!znalezione.isEmpty()) {
+                                // Zapisujemy znalezione gwiazdy do pliku o nazwie "gwiazdy_poczatekPrzedzialu-koniecPrzedzialuK.ser"
+                                try {
+                                    FileOutputStream fos = new FileOutputStream("gwiazdy_" + poczatekPrzedzialu + "-" + koniecPrzedzialu + "K.ser");
+                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                    oos.writeObject(znalezione);
+                                    oos.close();
+                                    fos.close();
+                                } catch (IOException ioe) {
+                                    ioe.printStackTrace();
+                                }
+                            }
+                            else if(znalezione.isEmpty())
                             {
                                 System.out.println("Nie znaleziono gwiazdy spełniającej podane kryteria");
                             }
@@ -132,7 +179,19 @@ public class Main {
                     {
                         gwiazda.wyswietl();
                     }
-                    if(znalezione.isEmpty())
+                    if(!znalezione.isEmpty()) {
+                        // Save the znalezione to a file
+                        try {
+                            FileOutputStream fos = new FileOutputStream("gwiazdy_" + polkula2 + ".ser");
+                            ObjectOutputStream oos = new ObjectOutputStream(fos);
+                            oos.writeObject(znalezione);
+                            oos.close();
+                            fos.close();
+                        } catch (IOException ioe) {
+                            ioe.printStackTrace();
+                        }
+                    }
+                    else if(znalezione.isEmpty())
                         System.out.println("Nie znaleziono gwiazd na podanej półkuli");
                     break;
                 case "8":
@@ -143,12 +202,23 @@ public class Main {
                             System.out.println("Podaj koniec przedziału wielkości gwiazdowej: ");
                             String wielkoscDo = scanner.nextLine();
                             List<Gwiazda> znaleziona=baza.wyszukajGwiazdyOWielkosciGwiazdowej(Double.parseDouble(wielkoscOd),Double.parseDouble(wielkoscDo));
-                            for(Gwiazda gwiazda : baza.wyszukajGwiazdyOWielkosciGwiazdowej(Double.parseDouble(wielkoscOd),Double.parseDouble(wielkoscDo)))
+                            for(Gwiazda gwiazda : znaleziona)
                             {
                                 gwiazda.wyswietl();
                             }
-
-                            if(znaleziona.isEmpty())
+                            if (!znaleziona.isEmpty()) {
+                                // Zapisujemy znalezione gwiazdy do pliku o nazwie "gwiazdy_wielkoscOd-wielkoscDo.ser"
+                                try {
+                                    FileOutputStream fos = new FileOutputStream("gwiazdy_" + wielkoscOd + "-" + wielkoscDo + ".ser");
+                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                    oos.writeObject(znaleziona);
+                                    oos.close();
+                                    fos.close();
+                                } catch (IOException ioe) {
+                                    ioe.printStackTrace();
+                                }
+                            }
+                            else if(znaleziona.isEmpty())
                             {
                                 System.out.println("Nie znaleziono gwiazdy spełniającej podane kryteria");
                             }
@@ -161,10 +231,25 @@ public class Main {
                     break;
 
                 case "9":
-                    for(Gwiazda gwiazda : baza.wyszukajSupernowe())
+                    List<Gwiazda> supernowe=baza.wyszukajSupernowe();
+                    for(Gwiazda gwiazda : supernowe)
                     {
                         gwiazda.wyswietl();
                     }
+                    if(!supernowe.isEmpty()) {
+                        // Zapisujemy znalezione gwiazdy do pliku o nazwie "supernowe.ser"
+                        try {
+                            FileOutputStream fos = new FileOutputStream("supernowe.ser");
+                            ObjectOutputStream oos = new ObjectOutputStream(fos);
+                            oos.writeObject(supernowe);
+                            oos.close();
+                            fos.close();
+                        } catch (IOException ioe) {
+                            ioe.printStackTrace();
+                        }
+                    }
+                    else if(supernowe.isEmpty())
+                        System.out.println("Nie znaleziono potencjalnych supernowych");
                     break;
                 case "0":
                     System.out.println("Do zobaczenia!");
