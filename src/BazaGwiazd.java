@@ -21,7 +21,7 @@ public class BazaGwiazd {
             return literaGrecka.name().toLowerCase() + " " + gwiazda.gwiazdozbior;
         }
     }
-    //Metoda pozwala usunąć gwiazdę z bazy gwiazd
+    //Metoda pozwala usunąć gwiazdę z bazy gwiazd na podstawie nazwy katalogowej
     boolean usunGwiazde(String nazwaKatalogowa) {
         boolean znaleziona=false;
         for (Map.Entry<String, List<Gwiazda>> entry : gwiazdozbiory.entrySet()) {
