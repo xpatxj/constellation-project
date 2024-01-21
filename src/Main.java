@@ -52,11 +52,7 @@ public class Main {
                     try {
 
                         // Zapisujemy wszystkie gwiazdy do pliku o nazwie "baza.ser"
-                        FileOutputStream fos = new FileOutputStream("baza.ser");
-                        ObjectOutputStream oos = new ObjectOutputStream(fos);
-                        oos.writeObject(baza);
-                        oos.close();
-                        fos.close();
+                        serialize(baza, "baza.ser");
                     } catch (IOException ioe) {
                         ioe.printStackTrace();
                     }
@@ -81,11 +77,7 @@ public class Main {
                         }
                         try {
                             // Zapisujemy znalezione gwiazdy do pliku o nazwie "nazwaGwiazdozbioru.ser"
-                            FileOutputStream fos = new FileOutputStream(nazwaGwiazdozbioru + ".ser");
-                            ObjectOutputStream oos = new ObjectOutputStream(fos);
-                            oos.writeObject(gwiazdy);
-                            oos.close();
-                            fos.close();
+                            serialize(gwiazdy, nazwaGwiazdozbioru + ".ser");
                         } catch (IOException ioe) {
                             ioe.printStackTrace();
                         }
@@ -105,11 +97,7 @@ public class Main {
                                 }
                                 try {
                                     // Zapisujemy znalezione gwiazdy do pliku o nazwie "gwiazdy_odlegloscWParsekachpc.ser"
-                                    FileOutputStream fos = new FileOutputStream("gwiazdy_" + odlegloscWParsekach + "pc.ser");
-                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                                    oos.writeObject(znalezione);
-                                    oos.close();
-                                    fos.close();
+                                    serialize(znalezione, "gwiazdy_" + odlegloscWParsekach + "pc.ser");
                                 } catch (IOException ioe) {
                                     ioe.printStackTrace();
                                 }
@@ -139,11 +127,7 @@ public class Main {
                             if(!znalezione.isEmpty()) {
                                 // Zapisujemy znalezione gwiazdy do pliku o nazwie "gwiazdy_poczatekPrzedzialu-koniecPrzedzialuK.ser"
                                 try {
-                                    FileOutputStream fos = new FileOutputStream("gwiazdy_" + poczatekPrzedzialu + "-" + koniecPrzedzialu + "K.ser");
-                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                                    oos.writeObject(znalezione);
-                                    oos.close();
-                                    fos.close();
+                                    serialize(znalezione, "gwiazdy_" + poczatekPrzedzialu + "-" + koniecPrzedzialu + ".ser");
                                 } catch (IOException ioe) {
                                     ioe.printStackTrace();
                                 }
@@ -182,11 +166,7 @@ public class Main {
                     if(!znalezione.isEmpty()) {
                         // Save the znalezione to a file
                         try {
-                            FileOutputStream fos = new FileOutputStream("gwiazdy_" + polkula2 + ".ser");
-                            ObjectOutputStream oos = new ObjectOutputStream(fos);
-                            oos.writeObject(znalezione);
-                            oos.close();
-                            fos.close();
+                            serialize(znalezione, "gwiazdy_" + polkula2 + ".ser");
                         } catch (IOException ioe) {
                             ioe.printStackTrace();
                         }
@@ -209,11 +189,7 @@ public class Main {
                             if (!znaleziona.isEmpty()) {
                                 // Zapisujemy znalezione gwiazdy do pliku o nazwie "gwiazdy_wielkoscOd-wielkoscDo.ser"
                                 try {
-                                    FileOutputStream fos = new FileOutputStream("gwiazdy_" + wielkoscOd + "-" + wielkoscDo + ".ser");
-                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                                    oos.writeObject(znaleziona);
-                                    oos.close();
-                                    fos.close();
+                                    serialize(znaleziona, "gwiazdy_" + wielkoscOd + "-" + wielkoscDo + ".ser");
                                 } catch (IOException ioe) {
                                     ioe.printStackTrace();
                                 }
@@ -239,11 +215,7 @@ public class Main {
                     if(!supernowe.isEmpty()) {
                         // Zapisujemy znalezione gwiazdy do pliku o nazwie "supernowe.ser"
                         try {
-                            FileOutputStream fos = new FileOutputStream("supernowe.ser");
-                            ObjectOutputStream oos = new ObjectOutputStream(fos);
-                            oos.writeObject(supernowe);
-                            oos.close();
-                            fos.close();
+                            serialize(supernowe, "supernowe.ser");
                         } catch (IOException ioe) {
                             ioe.printStackTrace();
                         }
@@ -260,5 +232,12 @@ public class Main {
                     break;
             }
         }
+    }
+    public static void serialize(Object obj, String fileName) throws IOException {
+        FileOutputStream fos = new FileOutputStream(fileName);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(obj);
+        oos.close();
+        fos.close();
     }
 }

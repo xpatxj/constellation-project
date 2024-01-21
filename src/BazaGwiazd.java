@@ -90,7 +90,7 @@ public class BazaGwiazd implements java.io.Serializable{
         }
         return listaGwiazd;
     }
-    //Metoda sprawdza po kolei czy wielkość gwiazdowa gwiazd w bazie mieści się w podanym przedziale i jeśli gwiazda spełnia warunek dodaje ją do listy, którą zwraca
+    //Metoda sprawdza po kolei czy absolutna wielkość gwiazdowa gwiazd w bazie mieści się w podanym przedziale i jeśli gwiazda spełnia warunek dodaje ją do listy, którą zwraca
     public  List<Gwiazda> wyszukajGwiazdyOWielkosciGwiazdowej(double poczatekPrzedzialu, double koniecPrzedzialu)
     {
         ArrayList<Gwiazda> listaGwiazd=new  ArrayList<Gwiazda>();
